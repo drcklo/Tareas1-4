@@ -1,0 +1,77 @@
+﻿﻿
+@page "/prioridades"
+@page "/prioridades/{PrioridadID:int}"
+@using Tarea1.Shared;
+@inject HttpClient httpClient
+
+<PageTitle>Registro de Prioridades</PageTitle>
+
+<label>@Mensaje</label>
+
+@code {
+
+    [Parameter]
+
+    public int PrioridadID { get; set; }
+
+    public Prioridades Prioridad { get; set; } = new Prioridades();
+
+    public string Mensaje { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (PrioridadID > 0)
+        {
+            this.Prioridad.PrioridadID = PrioridadID;
+            await Buscar();
+        }
+    }
+
+    public async Task Buscar()
+    {
+        var prioridadEncontrada = await httpClient.GetFromJsonAsync<Prioridades>($"api/Prioridades/{Prioridad.PrioridadID}");
+        if (prioridadEncontrada != null)
+        {
+            this.Prioridad = prioridadEncontrada;
+            StateHasChanged();
+        }
+        else
+        {
+            Mensaje = "Prioridad no encontrado";
+        }
+    }
+
+    public async Task Guardar()
+    {
+        using var response = await httpClient.PostAsJsonAsync("api/Prioridades", Prioridad);
+        if (!response.IsSuccessStatusCode)
+        {
+            Mensaje = response.ReasonPhrase ?? "error";
+            return;
+        }
+        var prioridadDevuelta = await response.Content.ReadFromJsonAsync<Prioridades>();
+        if (prioridadDevuelta is not null)
+        {
+            Prioridad = prioridadDevuelta;
+            StateHasChanged();
+        }
+    }
+
+    public void Nuevo()
+    {
+        this.Prioridad = new Prioridades();
+        Mensaje = string.Empty;
+    }
+
+    public async Task Eliminar()
+    {
+        using var response = await httpClient.DeleteAsync($"api/Prioridades/{Prioridad.PrioridadID}");
+        if (!response.IsSuccessStatusCode)
+        {
+            Mensaje = response.ReasonPhrase ?? "error";
+            return;
+        }
+        else
+            Nuevo();
+    }
+}

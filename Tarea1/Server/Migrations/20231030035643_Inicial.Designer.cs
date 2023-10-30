@@ -10,7 +10,7 @@ using Tarea1.Server.DAL;
 namespace Tarea1.Server.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231030013029_Inicial")]
+    [Migration("20231030035643_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />

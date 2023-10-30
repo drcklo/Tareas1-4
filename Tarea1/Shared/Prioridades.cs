@@ -15,7 +15,7 @@ namespace Tarea1.Shared
         public string? Descripción { get; set; }
         [Required(ErrorMessage ="Este campo es obligatorio")]
         [Range(1,int.MaxValue, ErrorMessage ="La cantidad de dias de compromiso debe ser mayor de 1")]
-        [RegularExpression(@"^\d$")]
+        [RegularExpression(@"^\d$",ErrorMessage ="Este campo solo acepta números")]
         public int DíasCompromiso { get; set; }
 
     }
