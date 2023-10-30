@@ -4,7 +4,81 @@
 @using Tarea3.Shared;
 @inject HttpClient httpClient
 
+<PageTitle>Registro de Tickets</PageTitle>
+<EditForm Model="Ticket" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
 
+    <div class="container">
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <h3>Registro de Tickets.</h3>
+            </div>
+            <div class=card-body>
+
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
+                    <label>Ticket ID:</label>
+                    <div class="input-group mb-3">
+                        <InputNumber @bind-Value="Ticket.TicketsId" class="form-control" aria-describedby="BotonBuscar" />
+                        <button @onclick="Buscar" class="btn btn-outline-primary" type="button" id="BotonBuscar"><i class="oi oi-magnifying-glass" /></button>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="Fecha">Fecha:</label>
+                    <InputDate @bind-Value="Ticket.Fecha" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.Fecha)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Cliente ID:</label>
+                    <InputNumber @bind-Value="Ticket.ClientesId" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.ClientesId)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Sistema ID :</label>
+                    <InputNumber @bind-Value="Ticket.SistemaId" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.SistemaId)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Prioridad ID:</label>
+                    <InputNumber @bind-Value="Ticket.PrioridadId" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.PrioridadId)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Solicitador Por:</label>
+                    <InputText @bind-Value="Ticket.SolicitadoPor" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.SolicitadoPor)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Asunto:</label>
+                    <InputText @bind-Value="Ticket.Asunto" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.Asunto)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Descripci&oacute;n:</label>
+                    <InputText @bind-Value="Ticket.Descripción" class="form-control" />
+                    <ValidationMessage For="@(() => Ticket.Descripción)" />
+                </div>
+
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary" @onclick="Nuevo">Nuevo <i class="oi oi-file" /></button>
+                    <button type="submit" class="btn btn-outline-success">Guardar <i class="oi oi-document" /></button>
+                    <button type="button" class="btn btn-outline-danger" @onclick="Eliminar">Eliminar <i class="oi oi-trash" /></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</EditForm>
+<label>@Mensaje</label>
 
 @code {
 
