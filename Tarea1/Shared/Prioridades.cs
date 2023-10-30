@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tarea1.Shared
 {
-    internal class Prioridades
+    public class Prioridades
     {
         [Key]
         int PrioridadID { get; set; }
