@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tarea3.Shared
 {
-    internal class Tickets
+    public class Tickets
     {
         [Key]
         public int TicketsId { get; set; }
