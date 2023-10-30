@@ -13,15 +13,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.9" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Client\Tarea2.Client.csproj" />
     <ProjectReference Include="..\Shared\Tarea2.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 
