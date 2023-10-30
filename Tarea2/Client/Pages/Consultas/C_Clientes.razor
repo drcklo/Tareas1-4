@@ -1,0 +1,20 @@
+﻿
+﻿@page "/consultaclientes"
+@using Tarea2.Shared;
+@inject HttpClient httpClient
+
+
+@code {
+    public List<Clientes>? Clientes { get; set; }
+    public int conteo { get; set; }
+
+    public async Task Buscar()
+    {
+        Clientes = await httpClient.GetFromJsonAsync<List<Clientes>>($"api/Clientes");
+
+        conteo = Clientes != null ? Clientes!.Count() : 0;
+        StateHasChanged();
+
+    }
+
+}
