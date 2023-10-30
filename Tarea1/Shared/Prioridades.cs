@@ -10,13 +10,13 @@ namespace Tarea1.Shared
     public class Prioridades
     {
         [Key]
-        int PrioridadID { get; set; }
+        public int PrioridadID { get; set; }
         [Required(ErrorMessage ="Este campo es obligatorio")]
-        string? Descripción { get; set; }
+        public string? Descripción { get; set; }
         [Required(ErrorMessage ="Este campo es obligatorio")]
         [Range(1,int.MaxValue, ErrorMessage ="La cantidad de dias de compromiso debe ser mayor de 1")]
         [RegularExpression(@"^\d$")]
-        int DíasCompromiso { get; set; }
+        public int DíasCompromiso { get; set; }
 
     }
 }
