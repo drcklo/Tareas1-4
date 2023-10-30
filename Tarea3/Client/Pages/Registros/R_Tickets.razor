@@ -1,0 +1,75 @@
+﻿
+@page "/registroclientes"
+@page "/registroclientes/{ClienteID:int}"
+@using Tarea3.Shared;
+@inject HttpClient httpClient
+
+
+
+@code {
+
+    [Parameter]
+
+    public int TicketsId { get; set; }
+
+    public Tickets Ticket { get; set; } = new Tickets();
+
+    public string Mensaje { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (TicketsId > 0)
+        {
+            this.Ticket.TicketsId = TicketsId;
+            await Buscar();
+        }
+    }
+
+    public async Task Buscar()
+    {
+        var ticketEncontrado = await httpClient.GetFromJsonAsync<Tickets>($"api/Tickets/{Ticket.TicketsId}");
+        if (ticketEncontrado != null)
+        {
+            this.Ticket = ticketEncontrado;
+            StateHasChanged();
+        }
+        else
+        {
+            Mensaje = "Ticket no encontrado";
+        }
+    }
+
+    public async Task Guardar()
+    {
+        using var response = await httpClient.PostAsJsonAsync("api/Tickets", Ticket);
+        if (!response.IsSuccessStatusCode)
+        {
+            Mensaje = response.ReasonPhrase ?? "error";
+            return;
+        }
+        var ticketDevuelto = await response.Content.ReadFromJsonAsync<Tickets>();
+        if (ticketDevuelto is not null)
+        {
+            Ticket = ticketDevuelto;
+            StateHasChanged();
+        }
+    }
+
+    public void Nuevo()
+    {
+        this.Ticket = new Tickets();
+        Mensaje = string.Empty;
+    }
+
+    public async Task Eliminar()
+    {
+        using var response = await httpClient.DeleteAsync($"api/Tickets/{Ticket.TicketsId}");
+        if (!response.IsSuccessStatusCode)
+        {
+            Mensaje = response.ReasonPhrase ?? "error";
+            return;
+        }
+        else
+            Nuevo();
+    }
+}
