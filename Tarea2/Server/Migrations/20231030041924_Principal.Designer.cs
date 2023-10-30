@@ -10,8 +10,8 @@ using Tarea2.Server.DAL;
 namespace Tarea2.Server.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231030014428_Inicial")]
-    partial class Inicial
+    [Migration("20231030041924_Principal")]
+    partial class Principal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

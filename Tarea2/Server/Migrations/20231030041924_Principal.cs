@@ -5,7 +5,7 @@
 namespace Tarea2.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class Principal : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
