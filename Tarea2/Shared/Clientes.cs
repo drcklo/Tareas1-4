@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tarea2.Shared
 {
-    internal class Clientes
+    public class Clientes
     {
         [Key]
         int ClienteID { get; set; }
