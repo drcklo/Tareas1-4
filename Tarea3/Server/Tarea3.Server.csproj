@@ -21,5 +21,9 @@
     <ProjectReference Include="..\Shared\Tarea3.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 
 </Project>
